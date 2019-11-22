@@ -17,7 +17,12 @@ def get_settings():
       new_role = line
     #end check
  #end func
-
+@client.event
+async def on_member_join(member):
+  msg = welcome_msg + '{0.author.mention}' + "!"
+  await client.send_message(message.channel, msg)
+#end
+#Create the given roles
 
 @client.event
 async def on_message(message):
@@ -25,7 +30,9 @@ async def on_message(message):
     if message.author == client.user:
         return
     #Commands
-    
+     if message.content.startswith('!hello'):
+        msg = 'Hello {0.author.mention}'.format(message)
+        await client.send_message(message.channel, msg)
 
 @client.event
 async def on_ready():
